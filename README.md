@@ -1,1 +1,1 @@
-# sprint_kotling
+# sprint kotlin REST JPA
