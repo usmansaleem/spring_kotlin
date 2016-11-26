@@ -1,1 +1,1 @@
-# sprint kotlin REST JPA
+# Spring Boot, Kotlin REST and JPA
