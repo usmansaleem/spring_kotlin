@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
+import org.hamcrest.CoreMatchers.`is` as Is
 
 
 /**
@@ -51,8 +52,8 @@ open class TenantRepositoryImplTest {
         val tenantList = tenantRepository.findTenantsWithRentReceiptCreatedInLastHours(1)
 
 
-        Assert.assertEquals(1, tenantList.size)
-        Assert.assertEquals(tenant2.id, tenantList.iterator().next().id)
+        Assert.assertThat(tenantList.size, Is(1))
+        Assert.assertThat(tenantList.iterator().next().id, Is(tenant2.id))
     }
 
     @Test fun testFindRentReceiptForGivenTenant() {
@@ -83,8 +84,8 @@ open class TenantRepositoryImplTest {
         val tenantList = rentReceiptRepository.findRentReceiptsForTenant(tenant2.id)
 
 
-        Assert.assertEquals(2, tenantList.size)
-        tenantList.forEach { Assert.assertEquals(tenant2.id, it.tenant.id) }
+        Assert.assertThat(tenantList.size, Is(2))
+        tenantList.forEach { Assert.assertThat(it.tenant.id, Is(tenant2.id)) }
     }
 
 }

@@ -14,9 +14,8 @@ class RentReceiptUtilTest {
     @Test fun testCreateRentReceiptForTenantFullPayment() {
         val tenant = Tenant(name="test", weeklyRentAmount = 300.0)
         val rentReceipt = createRentReceiptForTenant(tenant, 300.0)
-        Assert.assertTrue(300.0 == rentReceipt.amount)
-        Assert.assertTrue(0.0 == rentReceipt.tenant.currentRentCreditAmount)
-
+        Assert.assertThat(rentReceipt.amount, Is(300.0))
+        Assert.assertThat(rentReceipt.tenant.currentRentCreditAmount, Is(0.0))
     }
 
     @Test fun testCreateRentReceiptDateAdvanced() {
@@ -29,16 +28,16 @@ class RentReceiptUtilTest {
         val actualCal = Calendar.getInstance()
         actualCal.time = rentReceipt.tenant.currentRentPaidToDate
 
-        Assert.assertEquals(expectedCal.get(Calendar.YEAR), actualCal.get(Calendar.YEAR))
-        Assert.assertEquals(expectedCal.get(Calendar.MONTH), actualCal.get(Calendar.MONTH))
-        Assert.assertEquals(expectedCal.get(Calendar.DAY_OF_MONTH), actualCal.get(Calendar.DAY_OF_MONTH))
+        Assert.assertThat(actualCal.get(Calendar.YEAR), Is(expectedCal.get(Calendar.YEAR)))
+        Assert.assertThat(actualCal.get(Calendar.MONTH), Is(expectedCal.get(Calendar.MONTH)))
+        Assert.assertThat(actualCal.get(Calendar.DAY_OF_MONTH), Is(expectedCal.get(Calendar.DAY_OF_MONTH)))
     }
 
     @Test fun testCreateRentReceiptForTenantRentCredit() {
         val tenant = Tenant(name="test", weeklyRentAmount = 300.0, currentRentCreditAmount = 50.0)
         val rentReceipt = createRentReceiptForTenant(tenant, 275.0)
-        Assert.assertTrue(275.0 == rentReceipt.amount)
-        Assert.assertTrue(25.0 ==  rentReceipt.tenant.currentRentCreditAmount)
+        Assert.assertThat(rentReceipt.amount, Is(275.0))
+        Assert.assertThat(rentReceipt.tenant.currentRentCreditAmount, Is(25.0))
     }
 
     @Test fun testCreateRentTwoWeeksWithCredit() {
@@ -53,9 +52,9 @@ class RentReceiptUtilTest {
         val actualCal = Calendar.getInstance()
         actualCal.time = rentReceipt.tenant.currentRentPaidToDate
 
-        Assert.assertEquals(expectedCal.get(Calendar.YEAR), actualCal.get(Calendar.YEAR))
-        Assert.assertEquals(expectedCal.get(Calendar.MONTH), actualCal.get(Calendar.MONTH))
-        Assert.assertEquals(expectedCal.get(Calendar.DAY_OF_MONTH), actualCal.get(Calendar.DAY_OF_MONTH))
+        Assert.assertThat(actualCal.get(Calendar.YEAR), Is(expectedCal.get(Calendar.YEAR)))
+        Assert.assertThat(actualCal.get(Calendar.MONTH), Is(expectedCal.get(Calendar.MONTH)))
+        Assert.assertThat(actualCal.get(Calendar.DAY_OF_MONTH), Is(expectedCal.get(Calendar.DAY_OF_MONTH)))
 
     }
 
@@ -71,9 +70,8 @@ class RentReceiptUtilTest {
         val actualCal = Calendar.getInstance()
         actualCal.time = rentReceipt.tenant.currentRentPaidToDate
 
-        Assert.assertEquals(expectedCal.get(Calendar.YEAR), actualCal.get(Calendar.YEAR))
-        Assert.assertEquals(expectedCal.get(Calendar.MONTH), actualCal.get(Calendar.MONTH))
-        Assert.assertEquals(expectedCal.get(Calendar.DAY_OF_MONTH), actualCal.get(Calendar.DAY_OF_MONTH))
-
+        Assert.assertThat(actualCal.get(Calendar.YEAR), Is(expectedCal.get(Calendar.YEAR)))
+        Assert.assertThat(actualCal.get(Calendar.MONTH), Is(expectedCal.get(Calendar.MONTH)))
+        Assert.assertThat(actualCal.get(Calendar.DAY_OF_MONTH), Is(expectedCal.get(Calendar.DAY_OF_MONTH)))
     }
 }
