@@ -15,7 +15,7 @@ import java.util.*
 fun createRentReceiptForTenant(tenant: Tenant, paidAmount: Double): RentReceipt {
     val workingTenant = tenant.copy()
     var adjustedPaidAmount = paidAmount
-    var credit = 0.0
+    var credit: Double
 
     do {
         credit = workingTenant.weeklyRentAmount - workingTenant.currentRentCreditAmount - adjustedPaidAmount
