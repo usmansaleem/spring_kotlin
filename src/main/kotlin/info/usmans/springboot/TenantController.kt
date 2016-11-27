@@ -1,9 +1,6 @@
 package info.usmans.springboot
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
  * Tenant REST Controller.
@@ -13,10 +10,19 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1/tenant")
-class TenantController {
+class TenantController(val repository: TenantRepository) {
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id:Long) =
-            Tenant(name="test" + id, weeklyRentAmount = 350.0, id=id)
+            repository.findOne(id)
+
+    @GetMapping
+    fun findAll() = repository.findAll()
+
+    @PostMapping
+    fun addTenant(@RequestBody tenant: Tenant ) =
+        repository.save(Tenant(tenant.name, tenant.weeklyRentAmount))
 
 }
+
+

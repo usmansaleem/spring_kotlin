@@ -1,12 +1,18 @@
 package info.usmans.springboot
 
 import java.util.*
+import javax.persistence.*
 
 /**
  * Rent Receipt
  * Created by Usman Saleem on 27/11/2016.
  */
-class RentReceipt(var amount: Double=0.0, var tenant: Tenant, var id: Long=0)
+@Entity
+class RentReceipt(var amount: Double=0.0,
+                  @OneToOne
+                  var tenant: Tenant,
+                  @Id @GeneratedValue(strategy = GenerationType.AUTO)
+                  var id: Long=0)
 
 /**
  * Creates a rent receipt for a tenant. Returns a pair of RentReceipt and tenant.
