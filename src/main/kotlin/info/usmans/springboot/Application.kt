@@ -1,5 +1,7 @@
 package info.usmans.springboot
 
+import info.usmans.springboot.model.Tenant
+import info.usmans.springboot.repositories.TenantRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
